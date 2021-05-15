@@ -1,6 +1,6 @@
 init:
 	docker network create --subnet=172.21.0.0/24  docker-bigdata-net
-	sh ./config/build.sh
+	docker pull liuyang0001/docker-bigdata:latest
 
 build:
 	sh ./config/build.sh
@@ -31,4 +31,7 @@ ps:
 
 images:
 	docker images
+
+pull:
+	docker pull liuyang0001/docker-bigdata:latest
 
