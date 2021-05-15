@@ -1,0 +1,49 @@
+# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+
+if [ "$PS1" ]; then
+  if [ "$BASH" ] && [ "$BASH" != "/bin/sh" ]; then
+    # The file bash.bashrc already sets the default PS1.
+    # PS1='\h:\w\$ '
+    if [ -f /etc/bash.bashrc ]; then
+      . /etc/bash.bashrc
+    fi
+  else
+    if [ "`id -u`" -eq 0 ]; then
+      PS1='# '
+    else
+      PS1='$ '
+    fi
+  fi
+fi
+
+if [ -d /etc/profile.d ]; then
+  for i in /etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+  unset i
+fi
+
+export JAVA_HOME=/usr/local/jdk1.8.0_161
+export SCALA_HOME=/usr/local/scala-2.11.8
+export HADOOP_HOME=/usr/local/hadoop-2.7.5
+export SPARK_HOME=/usr/local/spark-2.2.0-bin-hadoop2.7
+
+
+export PATH=$JAVA_HOME/bin:$SCALA_HOME/bin:$HADOOP_HOME/bin:$SPARK_HOME/bin:$PATH
+export ZK_HOME=/usr/local/zookeeper-3.4.10
+export PATH=$PATH:$ZK_HOME/bin
+
+export HBASE_HOME=/usr/local/hbase-1.2.6
+export PATH=$PATH:$HBASE_HOME/bin
+
+export HIVE_HOME=/usr/local/apache-hive-2.3.3-bin
+export PATH=$PATH:$HIVE_HOME/bin
+
+export FLUME_HOME=/usr/local/apache-flume-1.8.0-bin
+export PATH=$PATH:$FLUME_HOME/bin
+
+export KAFKA_HOME=/usr/local/kafka_2.11-1.0.0
+export PATH=$PATH:$KAFKA_HOME/bin
