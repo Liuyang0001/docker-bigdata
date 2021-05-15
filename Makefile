@@ -1,15 +1,15 @@
 init:
 	docker network create --subnet=172.21.0.0/24  docker-bigdata-net
-	sh build.sh
+	sh ./config/build.sh
 
 build:
-	sh build.sh
+	sh ./config/build.sh
 
 up:
-	sh /home/liu/docker-bigdata/config/start_containers.sh
+	sh ./config/start_containers.sh
 
 down:
-	sh /home/liu/docker-bigdata/config/stop_containers.sh
+	sh ./config/stop_containers.sh
 
 bash01:
 	docker exec -it hadoop-master bash
